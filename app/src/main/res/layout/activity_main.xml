@@ -8,11 +8,24 @@
     android:background="@color/activity_color"
     tools:context=".MainActivity">
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonAddFragment"
         android:text="Add Fragment" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSecondActivity"
+            android:text="Second Activity" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

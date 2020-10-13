@@ -16,73 +16,83 @@ public class SampleFragment extends Fragment {
     private static final String COMMON_TAG = "CombinedLifeCycle";
     private static final String FRAGMENT_NAME = SampleFragment.class.getSimpleName();
     private static final String TAG = COMMON_TAG;
+    private boolean allowRefresh = false;
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.i(TAG, FRAGMENT_NAME +" onAttach");
+        Log.i(TAG, FRAGMENT_NAME + " onAttach");
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, FRAGMENT_NAME +" onCreate");
+        Log.i(TAG, FRAGMENT_NAME + " onCreate");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.i(TAG, FRAGMENT_NAME +" onCreateView");
-        return inflater.inflate(R.layout.fragment_sample,container,false);
+        Log.i(TAG, FRAGMENT_NAME + " onCreateView");
+        return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.i(TAG, FRAGMENT_NAME +" onActivityCreated");
+        Log.i(TAG, FRAGMENT_NAME + " onActivityCreated");
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onStart() {
-        Log.i(TAG, FRAGMENT_NAME +" onStart");
+        Log.i(TAG, FRAGMENT_NAME + " onStart");
         super.onStart();
     }
 
     @Override
     public void onResume() {
-        Log.i(TAG, FRAGMENT_NAME +" onResume");
+        Log.i(TAG, FRAGMENT_NAME + " onResume");
         super.onResume();
+        /* reload fragment */
+        if (allowRefresh) {
+            allowRefresh = false;
+            //call your initialization code here
+//            getFragmentManager().beginTransaction().replace(Fragment_Container,fragment).commit();
+            Log.i(TAG, FRAGMENT_NAME + " onResume Two called....");
+        }
     }
 
     @Override
     public void onPause() {
-        Log.i(TAG, FRAGMENT_NAME +" onPause");
+        Log.i(TAG, FRAGMENT_NAME + " onPause");
         super.onPause();
+        if (!allowRefresh)
+            allowRefresh = true;
     }
 
     @Override
     public void onStop() {
-        Log.i(TAG, FRAGMENT_NAME +" onStop");
+        Log.i(TAG, FRAGMENT_NAME + " onStop");
         super.onStop();
     }
 
 
     @Override
     public void onDestroyView() {
-        Log.i(TAG, FRAGMENT_NAME +" onDestroyView");
+        Log.i(TAG, FRAGMENT_NAME + " onDestroyView");
         super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, FRAGMENT_NAME +" onDestroy");
+        Log.i(TAG, FRAGMENT_NAME + " onDestroy");
         super.onDestroy();
     }
 
     @Override
     public void onDetach() {
-        Log.i(TAG, FRAGMENT_NAME +" onDetach");
+        Log.i(TAG, FRAGMENT_NAME + " onDetach");
         super.onDetach();
     }
 }
